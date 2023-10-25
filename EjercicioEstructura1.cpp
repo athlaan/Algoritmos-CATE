@@ -1,10 +1,12 @@
 
-/*Realizar un programa que permite tener el control de alquileres de un videoclub, teniendo en cuenta que un cliente puede llevarse m√°s de una pelicula
+/*Realizar un programa que permite tener el control de alquileres de un videoclub, teniendo en cuenta que un cliente puede llevarse m·s de una pelicula
 el sistema debe permitir algoritmo de alta baja modificacion ABM.*/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
 
 struct peliculas{
 	int id;
@@ -26,9 +28,28 @@ struct cliente{
 
 
 struct Alquilar{
-	struct cliente CLIENTES[10];
-	struct peliculas PELICULA[10];
+	struct cliente CLIENTE;
+	struct peliculas PELICULA;
 };
+
+struct cliente buscarCliente(struct cliente Clientes[], int idCliente[]){
+  struct cliente ClienteBuscado;
+  ClienteBuscado.idCliente[0]=-1;
+
+  bool salir;
+  int j;
+  j = 0;
+  salir = false;
+	while(!salir && j < 10){
+		if(Clientes[j].idCliente == idCliente){
+			salir = true;
+			ClienteBuscado = Clientes[j];
+		}
+		j++;
+	}
+return ClienteBuscado;
+};
+
 
 int main(){
 	
@@ -98,15 +119,31 @@ int main(){
 				
 				printf("Cuantas peliculas quiere alquilar: ");
 				scanf("%d", &alq);
-				
+				int idCliente[50];
+				int idPelicula;
+				struct cliente ClienteBuscado;
 				for(int i = 0; i < alq; i++){
+				
 					
-				printf("Ingrese el ID del cliente: ");
-				scanf("%d", &alquilar[i].CLIENTES[10].idCliente);
+					printf("Ingrese el ID del cliente: ");
+					//scanf("%d", &alquilar[i].CLIENTES[10].idCliente);
+					scanf("%d", &idCliente);
 					
-				printf("Ingrese el ID de la pelicula: ");
-				scanf("%d", &alquilar[i].PELICULA[10].id);
+					//buscar cliente
+					//almacenarlo en alquilar[i].CLIENTE
+				    ClienteBuscado = buscarCliente(CLIENTE,idCliente);
+				    
+				    if(ClienteBuscado.idCliente[0] == -1){
+				    	printf("No se encontro al cliente %d", idCliente);
+				    	break;
+					}
 					
+					printf("Ingrese el ID de la pelicula: ");
+					//scanf("%d", &alquilar[i].PELICULA[10].id);
+					scanf("%d",&idPelicula);
+						
+					//buscar pelicula
+					//almacenarlo en alquilar[i].PELICULA
 					
 				};
 					
@@ -115,15 +152,15 @@ int main(){
 		
 		
 			   printf("Ingrese el id del cliente que quiere borrar: ");
-                int idAEliminar;
+                int idAEliminar[10];
                 scanf("%d", &idAEliminar);
                 eliminado = 0;
 
                 for (int i = 0; i < usur; i++) {
                     if (CLIENTE[i].idCliente == idAEliminar) {
-                        printf("Se elimin√≥ el usuario.\n");
+                        printf("Se eliminÛ el usuario.\n");
                         eliminado = 1;
-                        // Aqu√≠ podr√≠as mover los elementos para llenar el espacio vac√≠o
+                        // AquÌ podrÌas mover los elementos para llenar el espacio vacÌo
                         // y reducir la cantidad de usuarios si lo deseas.
                     }
                 };
@@ -151,9 +188,9 @@ int main(){
 			printf("Clientes: ");
 
 			for (int i = 0; i < alq; i++) {
-   			printf("Nombre Del cliente: %s\n Id del cliente: %d\n", alquilar.CLIENTES[i].nombre, alquilar.CLIENTES[i].idCliente);
+   			printf("Nombre Del cliente: %s\n Id del cliente: %d\n", alquilar[i].CLIENTE.nombre, alquilar[i].CLIENTE.idCliente);
    		
-		   	printf("Nombre de la pelicula: %s\n Id de la pelicula: %d\n", alquilar.PELICULA[i].nombre, alquilar.PELICULA[i].id);
+		   	printf("Nombre de la pelicula: %s\n Id de la pelicula: %d\n", alquilar[i].PELICULA.nombre, alquilar[i].PELICULA.id);
 			
 			};
 	
